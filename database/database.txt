@@ -1,0 +1,291 @@
+-- Relational PostGreSQL multi-tenant database
+
+
+-- TABLE THAT STORES THE CONNECTION BETWEEN PORTAL USER ACCOUNT AND THEIR PROVIDER ACCOUNTS
+
+CREATE TABLE IF NOT EXISTS public.conexiuni
+(
+    id bigint NOT NULL DEFAULT nextval('conexiuni_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    key character varying(255) COLLATE pg_catalog."default",
+    portalname character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT conexiuni_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORE THE CONNECTION BETWEEN THE FIRST PROVIDER PLATFORM AND THE PORTAL
+
+CREATE TABLE IF NOT EXISTS public.conexiunif1
+(
+    id bigint NOT NULL DEFAULT nextval('conexiuni_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    key character varying(255) COLLATE pg_catalog."default",
+    portalname character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT conexiunif1_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORE THE CONNECTION BETWEEN THE SECOND PROVIDER PLATFORM AND THE PORTAL
+
+CREATE TABLE IF NOT EXISTS public.conexiunif2
+(
+    id bigint NOT NULL DEFAULT nextval('conexiuni_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    key character varying(255) COLLATE pg_catalog."default",
+    portalname character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT conexiunif2_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORES THE DEVELOPERS ACCOUNT ON THE FIRST PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.developers
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    company character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    url character varying(444) COLLATE pg_catalog."default",
+    secret character varying(444) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(255) COLLATE pg_catalog."default",
+    address character varying(255) COLLATE pg_catalog."default",
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    job character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT apps_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE DEVELOPERS ACCOUNT ON THE SECOND PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.developers2
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    company character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    url character varying(444) COLLATE pg_catalog."default",
+    secret character varying(444) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(255) COLLATE pg_catalog."default",
+    address character varying(255) COLLATE pg_catalog."default",
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    job character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT apps_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORES THE INFOS OF THE BILLS ON THE PORTAL APP
+
+CREATE TABLE IF NOT EXISTS public.facturi
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    datacr date NOT NULL,
+    datasc date NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    platita character varying(10) COLLATE pg_catalog."default" NOT NULL DEFAULT 'NU'::character varying,
+    code integer NOT NULL,
+    address character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    dataplata date,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    notification_sent boolean DEFAULT false,
+    CONSTRAINT facturi_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE INFOS OF THE BILLS ON THE FIRST PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.facturif1
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    datacr date NOT NULL,
+    datasc date NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    platita character varying(10) COLLATE pg_catalog."default" NOT NULL DEFAULT 'NU'::character varying,
+    code integer NOT NULL,
+    address character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    dataplata date,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    notification_sent boolean DEFAULT false,
+    CONSTRAINT facturif1_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORES THE INFOS OF THE BILLS ON THE SECOND PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.facturif2
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    datacr date NOT NULL,
+    datasc date NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    platita character varying(10) COLLATE pg_catalog."default" NOT NULL DEFAULT 'NU'::character varying,
+    code integer NOT NULL,
+    address character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    dataplata date,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    notification_sent boolean DEFAULT false,
+    CONSTRAINT facturif2_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORES THE INFOS OF THE SCHEDULED BILLS ON THE FIRST PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.scheduled_bills
+(
+    id bigint NOT NULL DEFAULT nextval('scheduled_bills_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum integer NOT NULL,
+    datasc date NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default",
+    address character varying(255) COLLATE pg_catalog."default",
+    code integer,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    scheduled_datetime timestamp without time zone NOT NULL,
+    status character varying(50) COLLATE pg_catalog."default" NOT NULL DEFAULT 'PENDING'::character varying,
+    CONSTRAINT scheduled_bills_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE INFOS OF THE SCHEDULED BILLS ON THE SECOND PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.scheduled_bills2
+(
+    id bigint NOT NULL DEFAULT nextval('scheduled_bills_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum integer NOT NULL,
+    datasc date NOT NULL,
+    furnizor character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(255) COLLATE pg_catalog."default",
+    address character varying(255) COLLATE pg_catalog."default",
+    code integer,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    scheduled_datetime timestamp without time zone NOT NULL,
+    status character varying(50) COLLATE pg_catalog."default" NOT NULL DEFAULT 'PENDING'::character varying,
+    CONSTRAINT scheduled_bills2_pkey PRIMARY KEY (id)
+)
+
+-- TABLE THAT STORES THE PAYMENTS ON THE PORTAL APP
+
+CREATE TABLE IF NOT EXISTS public.tranzactii
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    id_factura bigint NOT NULL,
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    date date NOT NULL,
+    CONSTRAINT tranzactii_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE PAYMENTS ON THE FIRST PROVIDER APP
+
+
+CREATE TABLE IF NOT EXISTS public.tranzactiif1
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    id_factura bigint NOT NULL,
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    date date NOT NULL,
+    CONSTRAINT tranzactiif1_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE PAYMENTS ON THE SECOND PROVIDER APP
+
+
+CREATE TABLE IF NOT EXISTS public.tranzactiif2
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    id_factura bigint NOT NULL,
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    tip character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    sum double precision NOT NULL,
+    date date NOT NULL,
+    CONSTRAINT tranzactiif2_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE USERS INFO ON THE PORTAL APP
+
+CREATE TABLE IF NOT EXISTS public.utilizatori
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone_number character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    birthday date NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(255) COLLATE pg_catalog."default",
+    last_name character varying(255) COLLATE pg_catalog."default",
+    photo text COLLATE pg_catalog."default",
+    country character varying(255) COLLATE pg_catalog."default",
+    currency character varying(255) COLLATE pg_catalog."default" DEFAULT 'RON'::character varying,
+    address character varying(255) COLLATE pg_catalog."default",
+    code integer,
+    admin character varying(255) COLLATE pg_catalog."default" DEFAULT 'NU'::character varying,
+    balance integer DEFAULT 0,
+    postal_code character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT utilizatori_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE USERS INFO ON THE FIRST PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.utilizatorif1
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone_number character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    birthday date NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(255) COLLATE pg_catalog."default",
+    last_name character varying(255) COLLATE pg_catalog."default",
+    photo text COLLATE pg_catalog."default",
+    country character varying(255) COLLATE pg_catalog."default",
+    currency character varying(255) COLLATE pg_catalog."default" DEFAULT 'RON'::character varying,
+    address character varying(255) COLLATE pg_catalog."default",
+    code integer,
+    admin character varying(255) COLLATE pg_catalog."default" DEFAULT 'NU'::character varying,
+    balance integer DEFAULT 0,
+    postal_code character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT utilizatorif1_pkey PRIMARY KEY (id)
+)
+
+
+-- TABLE THAT STORES THE USERS INFO ON THE SECOND PROVIDER APP
+
+CREATE TABLE IF NOT EXISTS public.utilizatorif2
+(
+    id bigint NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone_number character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    birthday date NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(255) COLLATE pg_catalog."default",
+    last_name character varying(255) COLLATE pg_catalog."default",
+    photo text COLLATE pg_catalog."default",
+    country character varying(255) COLLATE pg_catalog."default",
+    currency character varying(255) COLLATE pg_catalog."default" DEFAULT 'RON'::character varying,
+    address character varying(255) COLLATE pg_catalog."default",
+    code integer,
+    admin character varying(255) COLLATE pg_catalog."default" DEFAULT 'NU'::character varying,
+    balance integer DEFAULT 0,
+    postal_code character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT utilizatorif2_pkey PRIMARY KEY (id)
+)
