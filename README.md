@@ -4,11 +4,10 @@ A comprehensive mobile payment solution featuring a centralized portal with 2 in
 
 ## 🏗️ Architecture Overview
 
-This project implements a **multi-tenant payment ecosystem** consisting of:
+This project implements a payment ecosystem consisting of:
 
 - **Central Portal App**: Main payment hub for end users
 - **Provider Apps**: Two independent provider applications (First Provider & Second Provider)
-- **Shared Database**: PostgreSQL database with multi-tenant architecture
 - **Mobile Frontend**: React Native/Expo applications
 - **Backend Services**: Spring Boot REST APIs with JWT authentication
 
@@ -70,30 +69,26 @@ This project implements a **multi-tenant payment ecosystem** consisting of:
 
 ## 🗄️ Database Schema
 
-### Multi-Tenant Architecture
-The PostgreSQL database implements a multi-tenant design with separate tables for each application:
+Each app has its own PostgreSQL database.
 
-**Portal Tables:**
+**Some of the portal tables:**
 - `utilizatori` - User accounts
 - `facturi` - Bills
 - `tranzactii` - Transactions
 - `conexiuni` - Provider connections
 
-**Provider Tables:**
-- `utilizatorif1/f2` - Provider-specific users
-- `facturif1/f2` - Provider-specific bills
-- `tranzactiif1/f2` - Provider-specific transactions
-- `conexiunif1/f2` - Provider connections
-- `developers/developers2` - Developer accounts
-- `scheduled_bills/scheduled_bills2` - Scheduled payments
+**Some of the provider tables:**
+- `utilizatori` - Provider-specific users
+- `facturi` - Provider-specific bills
+- `tranzactii` - Provider-specific transactions
+- `conexiuni` - Provider connections
+- `developers` - Developer accounts
+- `scheduled_bills` - Scheduled payments
 
-### Key Database Features:
-- **Multi-tenant isolation** with separate tables per provider
-- **Connection management** between portal and providers
+### Some of the key DB features:
 - **Scheduled payments** support
 - **Notification tracking** for bills
-- **Audit trails** with timestamps
-- **Currency support** (RON default)
+- **Currency support**
 - **Admin role management**
 
 ## 🚀 Key Features
@@ -175,8 +170,6 @@ The PostgreSQL database implements a multi-tenant design with separate tables fo
 ### Database
 - **RDBMS**: PostgreSQL
 - **Connection Pool**: HikariCP
-- **Migration**: Flyway (planned)
-- **Multi-tenancy**: Schema-based separation
 
 ### Development Tools
 - **IDE**: VS Code recommended
@@ -192,12 +185,6 @@ The PostgreSQL database implements a multi-tenant design with separate tables fo
 - PostgreSQL 12+
 - Android Studio (for Android development)
 - Xcode (for iOS development, macOS only)
-
-### Database Setup
-1. Install PostgreSQL
-2. Create database: `postgres`
-3. Create user: `florin1` with password: `florin1`
-4. Run database schema from `database/database.txt`
 
 ### Backend Setup
 
@@ -255,12 +242,6 @@ npx expo start
 1. Build APK/IPA: `expo build:android` / `expo build:ios`
 2. Deploy to app stores or internal distribution
 3. Configure production API endpoints
-
-### Database Deployment
-1. Set up PostgreSQL server
-2. Configure connection pooling
-3. Set up automated backups
-4. Configure monitoring and logging
 
 ## 📱 Mobile App Features
 
@@ -371,40 +352,6 @@ npx expo start
 - `POST /api/payments/card` - Card payment
 - `POST /api/payments/bank-transfer` - Bank transfer
 - `GET /api/payments/history` - Payment history
-
-## 🤝 Contributing
-
-### Development Workflow
-1. Fork the repository
-2. Create feature branch
-3. Implement changes
-4. Add tests
-5. Submit pull request
-
-### Code Standards
-- Follow Java coding conventions
-- Use TypeScript for frontend
-- Implement proper error handling
-- Add comprehensive documentation
-- Write unit tests
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-### Common Issues
-1. **Database Connection**: Check PostgreSQL service and credentials
-2. **API Connection**: Verify backend is running and ports are correct
-3. **Mobile Build**: Ensure Expo CLI is installed and configured
-4. **Authentication**: Check JWT configuration and token expiration
-
-### Getting Help
-- Check the documentation
-- Review error logs
-- Test API endpoints
-- Verify configuration files
 
 ## 🔮 Future Enhancements
 
